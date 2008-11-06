@@ -9,16 +9,13 @@ function! GotoTab(name)
 	for i in range(1, tabpagenr('$'))
 	    let tab_windows = tabpagebuflist(i)
 	    if count(tab_windows, buf_nbr) == 1
-		let win_nbr = index(tab_windows, buf_nbr)
+		let win_nbr = index(tab_windows, buf_nbr) + 1
 		let tab_nbr = i
 		break
 	    endif
 	endfor
 	exe 'tabn ' . tab_nbr
-	exe 'wincmd t'
-	if win_nbr != -1
-	    exe (win_nbr + 1) . 'wincmd w'
-	endif
+	exe win_nbr . 'wincmd w'
     else
 	exe 'tabe ' . a:name
     endif
